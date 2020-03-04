@@ -9,3 +9,17 @@
 ## 工具
 [git](https://git-scm.com/download)
 [Visual Paradigm(画流程图)](https://www.visual-paradigm.com)
+
+##脚本
+```sql
+CREATE CACHED TABLE PUBLIC.USER(
+    ID INT NOT NULL primary key auto_increment,
+    ACCOUNT_ID VARCHAR(100),
+    NAME VARCHAR(50),
+    TOKEN CHAR(36),
+    GMT_CREATE BIGINT,
+    GMT_MODIFIED BIGINT
+)
+
+
+```
