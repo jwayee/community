@@ -9,16 +9,19 @@
 ## 工具
 [git](https://git-scm.com/download)
 [Visual Paradigm(画流程图)](https://www.visual-paradigm.com)
+[Flyway](https://flywaydb.org/getstarted/firststeps/maven)
 
 ##脚本
 ```sql
-CREATE CACHED TABLE PUBLIC.USER(
-    ID INT NOT NULL primary key auto_increment,
+CREATE TABLE USER(
+    ID INT auto_increment primary key NOT NULL,
     ACCOUNT_ID VARCHAR(100),
     NAME VARCHAR(50),
     TOKEN CHAR(36),
     GMT_CREATE BIGINT,
     GMT_MODIFIED BIGINT
 )
-
+```
+```bash
+mvn flyway:migrate
 ```
