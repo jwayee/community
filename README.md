@@ -10,6 +10,7 @@
 [git](https://git-scm.com/download)
 [Visual Paradigm(画流程图)](https://www.visual-paradigm.com)
 [Flyway](https://flywaydb.org/getstarted/firststeps/maven)
+[lombok](https://www.projectlombok.org/)
 
 ##脚本
 ```sql
