@@ -20,6 +20,7 @@ public class HelloController {
 //        那么为什么不把用户信息存到前端cookie中呢，只存一个令牌或者token来前后端交换使用（gitHub里也是这样的，大部分网站也是这样做到）
 //          问题：当用户访问量大的时候,我们还用数据库校验这种方式,成本会非常高或者说请求非常慢,我们这里只是通过大家小范围,小用户量的场景去给大家更仔细的剖析一下这种token和session，包括这种一次性访问、分布式session的一种方式，深入了解这套机制后，我们可以用redis,或者其他方式做这种机制
         Cookie[] cookies = request.getCookies();
+        if (cookies!=null&&cookies.length!=0)
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("token")){
                 String token = cookie.getValue();
