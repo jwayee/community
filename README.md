@@ -6,6 +6,7 @@
 [es 社区](https://elasticsearch.cn/explore)
 [bootstap](https://v3.bootcss.com/getting-started)
 [Github OAuth](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)
+[Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)
 ## 工具
 [git](https://git-scm.com/download)
 [Visual Paradigm(画流程图)](https://www.visual-paradigm.com)

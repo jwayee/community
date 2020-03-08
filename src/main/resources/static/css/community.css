@@ -21,3 +21,22 @@ body{
     margin: auto;
     box-shadow: 0px 0px 10px rgba(0,0,0,.3);
 }
+.faxian{
+    font-size: 20px;
+}
+.line{
+    margin-bottom: 0;
+}
+.media-object{
+    width: 40px;
+    border-radius:4px;
+}
+.media{
+    padding: 14px 0;
+    border-bottom: 1px solid #DDD;
+}
+.text-color{
+    font-size: 12px;
+    font-weight: normal;
+    color: #999;
+}
