@@ -23,4 +23,19 @@ public interface QuestionMapper {
      */
     @Select("select count(1) from question")
     Integer count();
+
+    /**
+     * 根据用户id查询问题并且分页
+     * @param userId
+     * @param offset
+     * @param size
+     * @return
+     */
+    @Select("select * from question where creator = #{userId} limit #{offset},#{size}")
+    List<Question> findByUserId(@Param(value = "userId") Integer userId, @Param(value="offset")Integer offset, @Param(value = "size") Integer size);
+    @Select("select count(1) from QUESTION where CREATOR = #{userId}")
+    Integer countByUserId(@Param(value = "userId") Integer userId);
+
+    @Select("select * from question where id = #{id}")
+    Question findById(Integer id);
 }

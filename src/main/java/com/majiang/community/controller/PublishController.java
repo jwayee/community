@@ -1,7 +1,6 @@
 package com.majiang.community.controller;
 
 import com.majiang.community.mapper.QuestionMapper;
-import com.majiang.community.mapper.UserMapper;
 import com.majiang.community.model.Question;
 import com.majiang.community.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,15 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class PublishController {
     @Autowired
     QuestionMapper questionMapper;
-    @Autowired
-    UserMapper userMapper;
     @GetMapping("/publish")
     public String publish(){
         return "publish";
@@ -46,19 +42,8 @@ public class PublishController {
             model.addAttribute("error","标签不能为空");
             return "publish";
         }
-        User user = null;
-        Cookie[] cookies = request.getCookies();
-        if (cookies!=null&&cookies.length!=0)
-        for (Cookie cookie : cookies) {
-            if (cookie.getName().equals("token")){
-                String token = cookie.getValue();
-                user = userMapper.findUserByToken(token);
-                if (user!=null){
-                    request.getSession().setAttribute("user",user);
-                }
-                break;
-            }
-        }
+        User user = (User) request.getSession().getAttribute("user");
+
         if (user==null){
             model.addAttribute("error","用户未登录");
             return "publish";
