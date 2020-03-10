@@ -1,5 +1,6 @@
 package com.majiang.community.mapper;
 
+import com.majiang.community.model.Question;
 import com.majiang.community.model.User;
 import org.apache.ibatis.annotations.*;
 
@@ -16,4 +17,6 @@ public interface UserMapper {
     User findUserByAccountId(String accountId);
     @Update("update user set name=#{name},avatar_url=#{avatarUrl},token=#{token},gmt_modified=#{gmtModified}")
     void update(User user);
+    @Select("select * from question where id = #{id}")
+    Question findQuestionById(Integer id);
 }
