@@ -1,10 +1,7 @@
 package com.majiang.community.mapper;
 
 import com.majiang.community.model.User;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 @Mapper
 public interface UserMapper {
@@ -15,4 +12,8 @@ public interface UserMapper {
     User findUserByToken(@Param("token")String token);
     @Select("select * from user where id = #{id}")
     User findUserById(@Param("id") Integer id);
+    @Select("select * from user where account_id = #{acountId}")
+    User findUserByAccountId(String accountId);
+    @Update("update user set name=#{name},avatar_url=#{avatarUrl},token=#{token},gmt_modified=#{gmtModified}")
+    void update(User user);
 }
