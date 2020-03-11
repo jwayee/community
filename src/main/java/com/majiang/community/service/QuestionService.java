@@ -2,6 +2,9 @@ package com.majiang.community.service;
 
 import com.majiang.community.dto.PaginationDTO;
 import com.majiang.community.dto.QuestionDTO;
+import com.majiang.community.exception.CustomizeErrorCode;
+import com.majiang.community.exception.CustomizeException;
+import com.majiang.community.mapper.QuestionExtendsMapper;
 import com.majiang.community.mapper.QuestionMapper;
 import com.majiang.community.mapper.UserMapper;
 import com.majiang.community.model.Question;
@@ -21,6 +24,8 @@ public class QuestionService {
     private UserMapper userMapper;
     @Autowired
     private QuestionMapper questionMapper;
+    @Autowired
+    private QuestionExtendsMapper questionExtendsMapper;
     public PaginationDTO list(Integer page, Integer size){
 /**       对应数据分页查询条件offset
  *         select * from question limit offset,size
@@ -111,8 +116,10 @@ public class QuestionService {
     }
 
     public QuestionDTO getById(Integer id) {
-//        Question question = questionMapper.findById(id);
         Question question = questionMapper.selectByPrimaryKey(id);
+        if (question==null){
+            throw new CustomizeException(CustomizeErrorCode.QUESTOIN_NOT_FOUND);
+        }
         User user = userMapper.selectByPrimaryKey(question.getCreator());
         QuestionDTO questionDTO = new QuestionDTO();
         BeanUtils.copyProperties(question,questionDTO);
@@ -137,7 +144,18 @@ public class QuestionService {
             QuestionExample example = new QuestionExample();
             example.createCriteria()
                     .andIdEqualTo(question.getId());
-            questionMapper.updateByExampleSelective(updateQuestion, example);
+            int updated = questionMapper.updateByExampleSelective(updateQuestion, example);
+            if (updated!=1){
+                throw new CustomizeException(CustomizeErrorCode.QUESTOIN_NOT_FOUND);
+            }
+
         }
+    }
+
+    public void incView(Integer id) {
+        Question updateQuestion = new Question();
+        updateQuestion.setId(id);
+        updateQuestion.setViewCount(1);
+        questionExtendsMapper.incView(updateQuestion);
     }
 }
