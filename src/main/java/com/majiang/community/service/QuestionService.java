@@ -4,7 +4,7 @@ import com.majiang.community.dto.PaginationDTO;
 import com.majiang.community.dto.QuestionDTO;
 import com.majiang.community.exception.CustomizeErrorCode;
 import com.majiang.community.exception.CustomizeException;
-import com.majiang.community.mapper.QuestionExtendsMapper;
+import com.majiang.community.mapper.QuestionExtendMapper;
 import com.majiang.community.mapper.QuestionMapper;
 import com.majiang.community.mapper.UserMapper;
 import com.majiang.community.model.Question;
@@ -25,7 +25,7 @@ public class QuestionService {
     @Autowired
     private QuestionMapper questionMapper;
     @Autowired
-    private QuestionExtendsMapper questionExtendsMapper;
+    private QuestionExtendMapper questionExtendMapper;
     public PaginationDTO list(Integer page, Integer size){
 /**       对应数据分页查询条件offset
  *         select * from question limit offset,size
@@ -60,7 +60,7 @@ public class QuestionService {
         List<Question> questionList = questionMapper.selectByExampleWithRowbounds(new QuestionExample(), new RowBounds(offset, size));
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questionList) {
-            Integer creator = question.getCreator();
+            Long creator = question.getCreator();
             User user = userMapper.selectByPrimaryKey(creator);
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question,questionDTO);
@@ -72,7 +72,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public PaginationDTO list(Integer userId, Integer page, Integer size) {
+    public PaginationDTO list(Long userId, Integer page, Integer size) {
 //        分页封装页面相关属性和数据
         PaginationDTO paginationDTO = new PaginationDTO();
 //       当前用户的问题总条数
@@ -101,9 +101,10 @@ public class QuestionService {
         QuestionExample example1 = new QuestionExample();
         example1.createCriteria().andCreatorEqualTo(userId);
         List<Question> questionList = questionMapper.selectByExampleWithRowbounds(example1, new RowBounds(offset, size));
+
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questionList) {
-            Integer creator = question.getCreator();
+            Long creator = question.getCreator();
             User user = userMapper.selectByPrimaryKey(creator);
             QuestionDTO questionDTO = new QuestionDTO();
             BeanUtils.copyProperties(question,questionDTO);
@@ -115,7 +116,7 @@ public class QuestionService {
         return paginationDTO;
     }
 
-    public QuestionDTO getById(Integer id) {
+    public QuestionDTO getById(Long id) {
         Question question = questionMapper.selectByPrimaryKey(id);
         if (question==null){
             throw new CustomizeException(CustomizeErrorCode.QUESTOIN_NOT_FOUND);
@@ -132,6 +133,9 @@ public class QuestionService {
             //插入数据
             question.setGmtCreate(System.currentTimeMillis());
             question.setGmtModified(question.getGmtCreate());
+            question.setViewCount(0);
+            question.setCommentCount(0);
+            question.setLikeCount(0);
             questionMapper.insert(question);
         }else{
             //更新数据
@@ -152,10 +156,10 @@ public class QuestionService {
         }
     }
 
-    public void incView(Integer id) {
+    public void incView(Long id) {
         Question updateQuestion = new Question();
         updateQuestion.setId(id);
         updateQuestion.setViewCount(1);
-        questionExtendsMapper.incView(updateQuestion);
+        questionExtendMapper.incView(updateQuestion);
     }
 }

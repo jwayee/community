@@ -38,7 +38,7 @@ body {
     border-radius: 4px;
 }
 
-.media {
+.user {
     padding: 14px 0;
     border-bottom: 1px solid #DDD;
 }
@@ -64,4 +64,70 @@ body {
 .eidit{
     color: #999;
     text-decoration: none;
+}
+/*question.html*/
+/*评论*/
+.show-comment-count{
+    display: inline-block;
+    width: 150px;
+    padding: 0;
+    line-height: 64px;
+    padding-left: 30px;
+    font-size: 20px;
+}
+.show-comment-by-type{
+    margin-bottom: 0;
+    padding-top: 50px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    float: right;
+    width: 200px;
+}
+.show-comment-by-type li{
+    width: 32px;
+    border-bottom: 1px solid red;
+    text-align: center;
+    font-size: 16px;
+}
+.comment-function{
+    line-height: 28px;
+}
+.comment-function li{
+    width: 50px;
+    float: left;
+    line-height: 28px;
+    text-align: center;
+    background-color: #DDD;
+    border-radius: 5px;
+}
+.comment-function li:not(:first-child){
+    margin-left: 25px;
+}
+.comment-function li:hover{
+    background-color: #00b5e5;
+}
+.comment-function li a{
+    color: #777;
+    text-decoration: none;
+}
+.comment-function li a:hover{
+    color: white;
+}
+.comment-function .time{
+    float: right;
+    color: #777;
+}
+/*评论部分*/
+.comment-user{
+    margin-top: 15px;
+    padding: 14px 0;
+}
+.linebox2{
+    height: 1px;
+    background-color: #777777;
+}
+.btn-commit{
+    float: right;
+    margin: 15px 0;
 }

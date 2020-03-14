@@ -6,14 +6,16 @@ package com.majiang.community.exception;
  * 所以说这个异常我不需要在调用的时候有任何的影响，而仅仅在我们的controllerAdvice中去try catch就好了
  */
 public class CustomizeException extends RuntimeException {
+    private Integer code;
     private String message;
 
     public CustomizeException(ICustomizeErrorCode customizeErrorCode) {
+        this.code = customizeErrorCode.getCode();
         this.message = customizeErrorCode.getMessage();
     }
 
-    public CustomizeException(String message) {
-        this.message = message;
+    public Integer getCode() {
+        return code;
     }
 
     @Override
