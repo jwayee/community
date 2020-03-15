@@ -10,14 +10,15 @@
 
     <script src="/js/jquery-3.4.1.min.js"></script>
     <script src="/js/bootstrap.min.js"></script>
-    window.onload = function () {
-    var closable = localStorage.getItem("closable");
-    if (closable=="true"){
-    window.close();
-    localStorage.removeItem("closable");
-    }
-    }
+
     <script type="application/javascript">
+        window.onload = function () {
+            var closable = localStorage.getItem("closable");
+            if (closable == "true") {
+                window.close();
+                localStorage.removeItem("closable");
+            }
+        }
     </script>
 </head>
 <body>
@@ -37,15 +38,18 @@
                 发布时间：<span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span>
             </span>
                 <hr class="line">
-                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${question.description}" style="margin: 30px 0;">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${question.description}"
+                     style="margin: 30px 0;">
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 linebox"></div>
-                <a th:href="@{'/publish/'+${question.id}}" class="eidit" th:if="${session.user!=null && question.creator == session.user.id}">
+                <a th:href="@{'/publish/'+${question.id}}" class="eidit"
+                   th:if="${session.user!=null && question.creator == session.user.id}">
                     <span class="glyphicon glyphicon-pencil"></span>
                     编辑
                 </a>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="height: 80px;padding: 0;border-bottom: 1px solid #CCCCCC;position: relative">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
+                 style="height: 80px;padding: 0;border-bottom: 1px solid #CCCCCC;position: relative">
                 <h2 class="show-comment-count"><span th:text="${question.commentCount}"></span> 回复</h2>
                 <ul class="show-comment-by-type">
                     <li>时间</li>
@@ -54,38 +58,86 @@
             <!--评论-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <!--评论列表-->
-                <div class="media" style="padding: 15px 0;border-bottom: 1px solid #CCCCCC" th:each="comment:${comments}">
+                <div class="media" style="padding: 15px 0;border-bottom: 1px solid #CCCCCC;height: auto;"
+                     th:each="comment:${comments}">
                     <div class="media-left" style="padding-top:8px">
                         <a href="#">
-                            <img class="media-object" id="question-img" th:src="${comment.user.avatarUrl}" style="width: 40px" alt="...">
+                            <img class="media-object" id="question-img" th:src="${comment.user.avatarUrl}"
+                                 style="width: 40px" alt="...">
                         </a>
                     </div>
-                    <div class="media-body">
+                    <div class="media-body" style="overflow: visible;">
                         <p style="margin:0px;font-size: 12px;color: #AAAAAA" th:text="${comment.user.name}">用户名</p>
                         <h4 class="media-heading" style="font-size: 16px;margin: 3px 0;" th:text="${comment.content}">
                             <!--你好呀，这是个问题-->
                         </h4>
                         <ul class="comment-function">
+                            <!--点赞-->
                             <li><a href=""><span class="glyphicon glyphicon-thumbs-up"></span>
                                 <span th:text="${comment.likeCount}"></span></a></li>
-                            <li><a href=""><span class="glyphicon glyphicon-comment"></span>
-                                <span>11</span></a></li>
-                            <div class="time" th:text="${#dates.format(comment.getGmtCreate(),'yyyy-MM-dd hh:mm:ss')}">1小时前</div>
+                            <!----------------------------------------二级评论功能-------------------------------------------------->
+                            <li type="button" data-toggle="collapse" data-target="#collapseExample"
+                                aria-expanded="false" aria-controls="collapseExample" th:data-id="${comment.id}"
+                                onclick="collapseComments(this)">
+                                <span class="glyphicon glyphicon-comment"></span>
+                                <span>11</span>
+                            </li>
+                            <div class="time" th:text="${#dates.format(comment.getGmtCreate(),'yyyy-MM-dd hh:mm:ss')}">
+                                <!--1小时前-->
+                            </div>
                         </ul>
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 collapse hiddenbox" style="padding: 0"
+                             th:id="${'comment-'+comment.id}">
+                            <!----------------------------------------二级评论列表-------------------------------------------------->
+                            <!--<div class="aw-comment-list-wrap">-->
+
+                                <!--<div class="aw-comment-list clearfix">-->
+                                <!--<div class="aw-comment-img">-->
+                                <!--<img src="/img/avatar-max-img.png" alt="">-->
+                                <!--</div>-->
+                                <!--<div class="aw-comment-right">-->
+                                <!--<div class="aw-comment-right-wrap">-->
+                                <!--<span class="nameandtime"><span class="username">jway</span> · <span class="span">2018-9-9</span></span>-->
+                                <!--<div class="reply"><a href="">回复</a></div>-->
+                                <!--<div class="reply"><a href="">删除</a></div>-->
+                                <!--</div>-->
+                                <!--<p class="comment-content">springboot是spring的升级版，如何快速学习springboot，springboot是spring的升级版，-->
+                                <!--如何快速学习springbootspringboot是spring的升级版，如何快速学习springbootspringboot是spring的升级版，-->
+                                <!--如何快速学习springbootspringboot是spring的升级版，如何快速学习springboot</p>-->
+                                <!--</div>-->
+                                <!--</div>-->
+                            <!--</div>-->
+                            <!--二级评论回复输入框-->
+                            <form action="" class="aw-comment-form clearfix">
+                                <div>
+                                    <input type="text" placeholder="评论一下。。。" class="second-comment-inp" name="content">
+                                    <ul class="comment2-submit">
+                                        <li class="submit" th:data-id="${comment.id}" onclick="submitComment(this)"><a>评论</a>
+                                        </li>
+                                        <li class="cancel">取消</li>
+                                    </ul>
+                                </div>
+                            </form>
+                        </div>
+
                     </div>
+
                 </div>
                 <!--回复评论框-->
                 <div id="comment_section">
-                    <div class="comment-user" >
+                    <div class="comment-user">
                         <div class="media">
                             <div class="media-left">
                                 <a href="#">
-                                    <img class="media-object" th:src="${user.avatarUrl==null}?${session.user.avatarUrl}:${user.avatarUrl}" style="width: 40px" alt="...">
+                                    <img class="media-object"
+                                         th:src="${user.avatarUrl==null}?${session.user.avatarUrl}:${user.avatarUrl}"
+                                         style="width: 40px" alt="...">
                                 </a>
                             </div>
                             <div class="media-body">
                                 <h4 class="media-heading">
-                                    <span th:text="${user.name==null}?${session.user.name}:${user.name}" style="line-height: 40px;"></span>
+                                    <span th:text="${user.name==null}?${session.user.name}:${user.name}"
+                                          style="line-height: 40px;"></span>
                                 </h4>
                             </div>
                         </div>
@@ -106,7 +158,8 @@
                     <div class="media">
                         <div class="media-left">
                             <a href="#">
-                                <img class="media-object" th:src="${question.user.avatarUrl}" style="width: 40px" alt="...">
+                                <img class="media-object" th:src="${question.user.avatarUrl}" style="width: 40px"
+                                     alt="...">
                             </a>
                         </div>
                         <div class="media-body">
@@ -124,6 +177,7 @@
         </div>
     </div>
 </div>
+<script src="/js/moment.js"></script>
 <script src="/js/community.js"></script>
 </body>
 </html>

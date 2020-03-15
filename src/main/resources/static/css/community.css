@@ -61,13 +61,15 @@ body {
     border-bottom: 1px solid #DDD;
     margin: 10px 0;
 }
-.eidit{
+
+.eidit {
     color: #999;
     text-decoration: none;
 }
+
 /*question.html*/
 /*评论*/
-.show-comment-count{
+.show-comment-count {
     display: inline-block;
     width: 150px;
     padding: 0;
@@ -75,7 +77,8 @@ body {
     padding-left: 30px;
     font-size: 20px;
 }
-.show-comment-by-type{
+
+.show-comment-by-type {
     margin-bottom: 0;
     padding-top: 50px;
     position: absolute;
@@ -84,50 +87,178 @@ body {
     float: right;
     width: 200px;
 }
-.show-comment-by-type li{
+
+.show-comment-by-type li {
     width: 32px;
-    border-bottom: 1px solid red;
     text-align: center;
     font-size: 16px;
 }
-.comment-function{
+
+.comment-function {
     line-height: 28px;
 }
-.comment-function li{
+
+.comment-function li {
     width: 50px;
     float: left;
     line-height: 28px;
     text-align: center;
-    background-color: #DDD;
+    background-color: #FAFAFA;
     border-radius: 5px;
 }
-.comment-function li:not(:first-child){
+
+.comment-function li:not(:first-child) {
     margin-left: 25px;
 }
-.comment-function li:hover{
+
+.comment-function li:hover {
     background-color: #00b5e5;
+}
+
+.comment-function li{
+    color: #777;
+    cursor: pointer;
 }
 .comment-function li a{
     color: #777;
     text-decoration: none;
 }
-.comment-function li a:hover{
+
+.comment-function li:hover {
     color: white;
 }
-.comment-function .time{
+.comment-function .aw-comment-wrap{
+    background-color: #00b5e5;
+    color: white;
+}
+.comment-function .time {
     float: right;
     color: #777;
 }
+
 /*评论部分*/
-.comment-user{
+.comment-user {
     margin-top: 15px;
     padding: 14px 0;
 }
-.linebox2{
+
+.linebox2 {
     height: 1px;
     background-color: #777777;
 }
-.btn-commit{
+
+.btn-commit {
     float: right;
     margin: 15px 0;
+}
+/********************二级评论样式************/
+/*输入框*/
+.hiddenbox{
+    position: relative;top: 10px;
+    border: 1px solid #e6e6e6;
+}
+.hiddenbox .second-comment-inp {
+    border: none;
+    width: 100%;
+    height: 40px;
+    outline: none;
+    border-radius: 4px;
+    padding-left: 8px;
+    border: 1px solid #AAAAAA;
+}
+.hiddenbox ul{
+    float: right;
+}
+.hiddenbox ul li{
+    float: left;
+}
+.hiddenbox li:nth-of-type(1){
+    margin-right:10px;
+}
+/*回复列表样式*/
+.aw-comment-list{
+    padding:10px 0;
+    width: 100%;
+}
+.aw-comment-list>div{
+    float: left;
+}
+.aw-comment-img img{
+    width: 32px;
+    margin: 10px;
+}
+.aw-comment-right{
+    width: 850px;
+}
+.nameandtime{
+    color: #AAAAAA;
+}
+.nameandtime .username{
+    color: #00b5e5;
+}
+.aw-comment-right .comment-content{
+    width: 815px;
+}
+.aw-comment-right-wrap{
+    height: 24px;
+}
+.aw-comment-right-wrap .reply{
+    float: right;
+}
+.aw-comment-right-wrap .reply:nth-of-type(2){
+    margin-right:10px;
+}
+.reply a{
+    display: block;
+    width: 40px;
+    height: 24px;
+    color: white;
+    line-height: 24px;
+    text-align: center;
+    background-color: yellowgreen;
+    border-radius: 4px;
+    text-decoration: none;
+
+}
+.reply a:hover{
+    background-color: green;;
+}
+/*输入框*/
+.aw-comment-form{
+    padding: 15px;
+    background-color: #FAFAFA;
+    border-radius: 4px;
+}
+.comment2-submit{
+    display: none;
+    margin: 15px 10px;
+}
+.comment2-submit li{
+    height: 24px;
+    line-height: 24px;
+    width: 40px;
+    background-color: yellowgreen;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+}
+.comment2-submit .submit:hover{
+    background-color: green;
+}
+.comment2-submit .submit a{
+    color: white;
+    text-decoration: none;
+}
+.comment2-submit .cancel{
+    color: #777777;
+    background-color: #FAFAFA;
+}
+.comment2-submit .cancel:hover{
+    color: white;
+    background-color: #999;
+}
+.clearfix::after{
+    content: "";
+    display: table;
+    clear: both;
 }

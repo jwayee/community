@@ -1,7 +1,9 @@
 package com.majiang.community.controller;
 
 import com.majiang.community.dto.CommentCreateDTO;
+import com.majiang.community.dto.CommentDTO;
 import com.majiang.community.dto.ResultDTO;
+import com.majiang.community.enums.CommentTypeEnum;
 import com.majiang.community.exception.CustomizeErrorCode;
 import com.majiang.community.model.Comment;
 import com.majiang.community.model.User;
@@ -9,12 +11,10 @@ import com.majiang.community.service.CommentService;
 import org.h2.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 
 @Controller
 public class CommentController {
@@ -42,5 +42,11 @@ public class CommentController {
         commentService.insert(comment);
 //        评论成功，返回封装信息对象
         return ResultDTO.okOf();
+    }
+    @ResponseBody
+    @RequestMapping("/comment/{id}")
+    public ResultDTO<List<CommentDTO>> comments(@PathVariable(name="id") Long id){
+        List<CommentDTO> commentDTOS = commentService.listByTargetId(id, CommentTypeEnum.COMMENT);
+        return ResultDTO.okOf(commentDTOS);
     }
 }
