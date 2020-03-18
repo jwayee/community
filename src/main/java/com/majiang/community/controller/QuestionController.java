@@ -31,11 +31,17 @@ public class QuestionController {
             user.setName("用户名");
             user.setAvatarUrl("/img/avatar-max-img.png");
         }
+//        增减阅读书本
         questionService.incView(id);
+//        查询问题
         QuestionDTO questionDTO = questionService.getById(id);
+//       查询评论
         List<CommentDTO> comments = commentService.listByTargetId(id, CommentTypeEnum.QUESTION);
+//       查询相关问题
+        List<QuestionDTO> relatedQuestions = questionService.selectRelated(questionDTO);
         //累加阅读数
         model.addAttribute("question",questionDTO);
+        model.addAttribute("relatedQuestion",relatedQuestions);
         model.addAttribute("comments",comments);
         model.addAttribute("user",user);
         return "question";

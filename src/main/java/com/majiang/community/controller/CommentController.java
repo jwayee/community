@@ -39,6 +39,7 @@ public class CommentController {
         comment.setGmtCreate(System.currentTimeMillis());
         comment.setGmtModified(System.currentTimeMillis());
         comment.setLikeCount(0L);
+        comment.setCommentCount(0);
         commentService.insert(comment);
 //        评论成功，返回封装信息对象
         return ResultDTO.okOf();

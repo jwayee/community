@@ -9,7 +9,7 @@ $("#comment_submit").click(function () {
 //回复二级评论
 function submitComment(e) {
     var commentId = e.getAttribute("data-id");
-    var content = $(".second-comment-inp").val();
+    var content = $("input[input-id="+commentId+"]").val();
     var type = 2;
     comment(commentId, content, type);
 };
@@ -74,7 +74,6 @@ function collapseComments(e) {
             success: function (result) {
                 if (result.code == 200) {
                     var comments = result.data;
-                    console.log(comments);
                     //清空内容
                     $.each(comments, function (index, comment) {
                         var commentWrap = $("<div/>").addClass("aw-comment-list-wrap").attr("parentId",comment.parentId)

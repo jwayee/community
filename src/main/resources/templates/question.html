@@ -30,23 +30,35 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" style="padding:0;border-right: 1px solid #AAAAAA ">
             <!--问题内容-->
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding-bottom:30px;">
-                <h2 class="faxian" th:text="${question.title}"></h2>
+                <h2 class="faxian" th:text="${question.title}" style="font-size: 24px;color: #00b5e5;font-weight: bold"></h2>
                 <span class="text-color">
-                作者：<span th:text="${question.user.getName()}"></span> |
-                评论数：<span th:text="${question.getCommentCount()}"></span> |
-                阅读数：<span th:text="${question.getViewCount()}"></span> |
-                发布时间：<span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span>
-            </span>
-                <hr class="line">
+                    作者：<span th:text="${question.user.getName()}"></span> |
+                    评论数：<span th:text="${question.getCommentCount()}"></span> |
+                    阅读数：<span th:text="${question.getViewCount()}"></span> |
+                    发布时间：<span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span>
+                </span>
+                <!--标签-->
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding:0;">
+                    <span th:each="tag:${question.tag.split(',')}">
+                        <span class="label label-info" style="margin-right: 10px;display:inline-block;line-height: 25px;">
+                            <span class="glyphicon glyphicon-tags"></span>
+                            <span th:text="${tag}" style="font-size: 14px"></span>
+                        </span>
+                    </span>
+                </div>
+                <hr class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="padding: 0">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" th:text="${question.description}"
                      style="margin: 30px 0;">
                 </div>
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 linebox"></div>
-                <a th:href="@{'/publish/'+${question.id}}" class="eidit"
-                   th:if="${session.user!=null && question.creator == session.user.id}">
-                    <span class="glyphicon glyphicon-pencil"></span>
-                    编辑
-                </a>
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <a th:href="@{'/publish/'+${question.id}}" class="eidit"
+                       th:if="${session.user!=null && question.creator == session.user.id}">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        编辑
+                    </a>
+                </div>
+
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"
                  style="height: 80px;padding: 0;border-bottom: 1px solid #CCCCCC;position: relative">
@@ -80,7 +92,7 @@
                                 aria-expanded="false" aria-controls="collapseExample" th:data-id="${comment.id}"
                                 onclick="collapseComments(this)">
                                 <span class="glyphicon glyphicon-comment"></span>
-                                <span>11</span>
+                                <span th:text="${comment.commentCount}">11</span>
                             </li>
                             <div class="time" th:text="${#dates.format(comment.getGmtCreate(),'yyyy-MM-dd hh:mm:ss')}">
                                 <!--1小时前-->
@@ -91,28 +103,29 @@
                             <!----------------------------------------二级评论列表-------------------------------------------------->
                             <!--<div class="aw-comment-list-wrap">-->
 
-                                <!--<div class="aw-comment-list clearfix">-->
-                                <!--<div class="aw-comment-img">-->
-                                <!--<img src="/img/avatar-max-img.png" alt="">-->
-                                <!--</div>-->
-                                <!--<div class="aw-comment-right">-->
-                                <!--<div class="aw-comment-right-wrap">-->
-                                <!--<span class="nameandtime"><span class="username">jway</span> · <span class="span">2018-9-9</span></span>-->
-                                <!--<div class="reply"><a href="">回复</a></div>-->
-                                <!--<div class="reply"><a href="">删除</a></div>-->
-                                <!--</div>-->
-                                <!--<p class="comment-content">springboot是spring的升级版，如何快速学习springboot，springboot是spring的升级版，-->
-                                <!--如何快速学习springbootspringboot是spring的升级版，如何快速学习springbootspringboot是spring的升级版，-->
-                                <!--如何快速学习springbootspringboot是spring的升级版，如何快速学习springboot</p>-->
-                                <!--</div>-->
-                                <!--</div>-->
+                            <!--<div class="aw-comment-list clearfix">-->
+                            <!--<div class="aw-comment-img">-->
+                            <!--<img src="/img/avatar-max-img.png" alt="">-->
+                            <!--</div>-->
+                            <!--<div class="aw-comment-right">-->
+                            <!--<div class="aw-comment-right-wrap">-->
+                            <!--<span class="nameandtime"><span class="username">jway</span> · <span class="span">2018-9-9</span></span>-->
+                            <!--<div class="reply"><a href="">回复</a></div>-->
+                            <!--<div class="reply"><a href="">删除</a></div>-->
+                            <!--</div>-->
+                            <!--<p class="comment-content">springboot是spring的升级版，如何快速学习springboot，springboot是spring的升级版，-->
+                            <!--如何快速学习springbootspringboot是spring的升级版，如何快速学习springbootspringboot是spring的升级版，-->
+                            <!--如何快速学习springbootspringboot是spring的升级版，如何快速学习springboot</p>-->
+                            <!--</div>-->
+                            <!--</div>-->
                             <!--</div>-->
                             <!--二级评论回复输入框-->
                             <form action="" class="aw-comment-form clearfix">
                                 <div>
-                                    <input type="text" placeholder="评论一下。。。" class="second-comment-inp" name="content">
+                                    <input type="text" placeholder="评论一下。。。" class="second-comment-inp"
+                                           th:input-id="${comment.id}" name="content" autocomplete="off">
                                     <ul class="comment2-submit">
-                                        <li class="submit" th:data-id="${comment.id}" onclick="submitComment(this)"><a>评论</a>
+                                        <li class="submit" onclick="submitComment(this)" th:data-id="${comment.id}"><a>评论</a>
                                         </li>
                                         <li class="cancel">取消</li>
                                     </ul>
@@ -173,6 +186,11 @@
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <h4>相关问题</h4>
+                <ul>
+                    <li th:each="related:${relatedQuestion}">
+                        <a style="font-size: 16px;text-decoration: none;margin: 10px 5px" th:href="@{'/question/'+${related.id} }" th:text="${related.title}"></a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>

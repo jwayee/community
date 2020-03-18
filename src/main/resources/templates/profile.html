@@ -19,20 +19,25 @@
             <h2 class="faxian" th:text="${sectionName}"></h2>
             <hr class="line">
 
-            <div class="media" th:each="question : ${paginationDTO.questions}">
+            <div class="media" th:each="question : ${paginationDTO.questions}" style="border-bottom: 1px solid #BBB;padding-bottom: 10px">
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object" id="question-img" th:src="${question.user.avatarUrl}" style="width: 40px" alt="...">
                     </a>
                 </div>
-                <div class="media-body">
-                    <h4 class="media-heading" th:text="${question.title}"></h4>
+                <div class="media-body" style="position: relative;">
+                    <h4 class="media-heading"><a th:text="${question.title}" th:href="@{'/question/'+${question.id}}"></a></h4>
                     <span class="text-color">
                         • <span th:text="${question.user.getName()}"></span> 发表了文章
                         • <span th:text="${question.getCommentCount()}"></span> 个回复
                         • <span th:text="${question.getViewCount()}"></span> 次浏览
                         • <span th:text="${#dates.format(question.getGmtCreate(),'yyyy-MM-dd HH:mm')}"></span>
                     </span>
+                    <a th:href="@{'/publish/'+${question.id}}" class="eidit" style="float: right;position: absolute;top: 0px;bottom: 0;right: 0;margin: auto;line-height: 44px;text-decoration: none"
+                       th:if="${session.user!=null && question.creator == session.user.id}">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                        编辑
+                    </a>
                 </div>
             </div>
             <nav aria-label="Page navigation" style="margin-left: 100px">

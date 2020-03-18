@@ -4,10 +4,7 @@ import com.majiang.community.dto.CommentDTO;
 import com.majiang.community.enums.CommentTypeEnum;
 import com.majiang.community.exception.CustomizeErrorCode;
 import com.majiang.community.exception.CustomizeException;
-import com.majiang.community.mapper.CommentMapper;
-import com.majiang.community.mapper.QuestionExtendMapper;
-import com.majiang.community.mapper.QuestionMapper;
-import com.majiang.community.mapper.UserMapper;
+import com.majiang.community.mapper.*;
 import com.majiang.community.model.*;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +24,8 @@ public class CommentService {
     QuestionMapper questionMapper;
     @Autowired
     QuestionExtendMapper questionExtendMapper;
+    @Autowired
+    CommentExtMapper commentExtMapper;
     @Transactional//事务注解
     public void insert(Comment comment) {
         if (comment.getParentId()==null||comment.getParentId()==0){
@@ -42,12 +41,17 @@ public class CommentService {
                 throw new CustomizeException(CustomizeErrorCode.COMMENT_NOT_FOUND);
             }
             commentMapper.insert(comment);
+            Comment parentComment = new Comment();
+            parentComment.setCommentCount(1);
+            parentComment.setId(comment.getParentId());
+            commentExtMapper.incCommentCount(parentComment);
         }else{
             //回复问题
             Question dbQuestion = questionMapper.selectByPrimaryKey(comment.getParentId());
             if (dbQuestion==null){
                 throw new CustomizeException(CustomizeErrorCode.QUESTOIN_NOT_FOUND);
             }
+
             commentMapper.insert(comment);
 //          添加评论数
             Question question = new Question();
