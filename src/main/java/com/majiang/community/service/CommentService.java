@@ -2,6 +2,8 @@ package com.majiang.community.service;
 
 import com.majiang.community.dto.CommentDTO;
 import com.majiang.community.enums.CommentTypeEnum;
+import com.majiang.community.enums.NotificationTypeEnum;
+import com.majiang.community.enums.NotificationStatusEnum;
 import com.majiang.community.exception.CustomizeErrorCode;
 import com.majiang.community.exception.CustomizeException;
 import com.majiang.community.mapper.*;
@@ -26,8 +28,10 @@ public class CommentService {
     QuestionExtendMapper questionExtendMapper;
     @Autowired
     CommentExtMapper commentExtMapper;
+    @Autowired
+    NotificationMapper notificationMapper;
     @Transactional//事务注解
-    public void insert(Comment comment) {
+    public void insert(Comment comment, User commentator) {
         if (comment.getParentId()==null||comment.getParentId()==0){
             throw new CustomizeException(CustomizeErrorCode.TARGET_PARAM_NOT_FOUND);
         }
@@ -45,15 +49,22 @@ public class CommentService {
             parentComment.setCommentCount(1);
             parentComment.setId(comment.getParentId());
             commentExtMapper.incCommentCount(parentComment);
+//            添加回复信息
+            createNotify(commentator.getId(),
+                    commentator.getName(),
+                    comment.getCommentator(),
+                    dbComment.getParentId(),
+                    dbComment.getContent(),
+                    NotificationTypeEnum.REPLY_COMMENT);
         }else{
             //回复问题
             Question dbQuestion = questionMapper.selectByPrimaryKey(comment.getParentId());
             if (dbQuestion==null){
                 throw new CustomizeException(CustomizeErrorCode.QUESTOIN_NOT_FOUND);
             }
-
+            //添加问题回复
             commentMapper.insert(comment);
-//          添加评论数
+            //添加评论数
             Question question = new Question();
             question.setCommentCount(1);
             question.setId(comment.getParentId());
@@ -61,11 +72,43 @@ public class CommentService {
             if (updated!=1){
                 throw new CustomizeException(CustomizeErrorCode.QUESTOIN_NOT_FOUND);
             }
+            //添加通知信息
+            createNotify(commentator.getId(),
+                        commentator.getName(),
+                        dbQuestion.getCreator(),
+                        dbQuestion.getId(),
+                        dbQuestion.getTitle(),
+                        NotificationTypeEnum.REPLY_QUESTION);
         }
     }
 
+    /**
+     * 添加通知信息
+     * @param receiver
+     * @param notifier
+     * @param notifierName
+     * @param outId
+     * @param outTitle
+     * @param notificationType
+     */
+    private void createNotify(Long notifier, String notifierName, Long receiver, Long outId, String outTitle, NotificationTypeEnum notificationType) {
+        Notification notification = new Notification();
+        notification.setGmtCreate(System.currentTimeMillis());
+        notification.setNotifier(notifier);
+        notification.setNotifierName(notifierName);
+        notification.setReceiver(receiver);
+        // 这里的parentId是问题或者回复的id
+        notification.setOutId(outId);
+        notification.setOutTitle(outTitle);
+        //  设置消息的类型
+        notification.setType(notificationType.getType());
+        // 设置消息为未读状态
+        notification.setStatus(0);
+        notificationMapper.insert(notification);
+    }
+
     public List<CommentDTO> listByTargetId(Long id, CommentTypeEnum commentTypeEnum) {
-//        根据id和type确认问题评论并且返回评论列表
+        //根据id和type确认问题评论并且返回评论列表
         CommentExample example = new CommentExample();
         example.createCriteria()
                 .andParentIdEqualTo(id)

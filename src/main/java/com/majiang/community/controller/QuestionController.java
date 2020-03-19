@@ -29,7 +29,7 @@ public class QuestionController {
         User user = new User();
         if (sessionUser==null){
             user.setName("用户名");
-            user.setAvatarUrl("/img/avatar-max-img.png");
+            user.setAvatarUrl("/images/avatar-max-img.png");
         }
 //        增减阅读书本
         questionService.incView(id);

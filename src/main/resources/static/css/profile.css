@@ -1,0 +1,13 @@
+.replies-wrap{
+    padding: 10px;
+    border-bottom: 1px solid #DDDDDD;
+    font-size: 18px;
+}
+.replies-wrap li{
+    float: left;
+    margin-left: 10px;
+
+}
+.replies-wrap .notified-title a{
+    text-decoration: none;
+}

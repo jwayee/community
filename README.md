@@ -12,7 +12,7 @@
 [Visual Paradigm(画流程图)](https://www.visual-paradigm.com)
 [Flyway](https://flywaydb.org/getstarted/firststeps/maven)
 [lombok](https://www.projectlombok.org/)
-
+[markdown插件](http://editor.md.ipandao.com/)
 ##脚本
 ```sql
 CREATE TABLE USER(
@@ -35,6 +35,18 @@ CREATE TABLE comment
     gmt_modified BIGINT NOT NULL,
     like_count BIGINT DEFAULT 0
 );
+CREATE TABLE notification
+  (
+      id bigint AUTO_INCREMENT PRIMARY KEY,
+      notifier bigint NOT NULL,
+      notifier_name VARCHAR(100) NOT NULL,
+      receiver bigint NOT NULL,
+      out_id bigint NOT NULL,
+      out_title varchar(256) NOT NULL,
+      type int DEFAULT 0,
+      gmt_create bigint DEFAULT 0
+  );
+
 ```
 
 ```bash

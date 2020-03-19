@@ -18,7 +18,7 @@
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" style="border-right: 1px solid #efefef;position: relative">
             <h2 class="faxian"><span class="glyphicon glyphicon-list"></span> 发现</h2>
             <hr class="line">
-            <div class="media" th:each="question : ${paginationDTO.questions}" style="margin: 30px;">
+            <div class="media" th:each="question : ${paginationDTO.data}" style="margin: 30px;">
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object" id="question-img" th:src="${question.user.avatarUrl}" style="width: 40px" alt="...">
