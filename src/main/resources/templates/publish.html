@@ -46,7 +46,10 @@
                             height: 450,
                             path: "/js/lib/",
                             watch: false,
-                            placeholder: "问题补充 (必填，请参照右侧提示):"
+                            placeholder: "问题补充 (必填，请参照右侧提示):",
+                            imageUpload: true,
+                            imageFormats: ["jpg", "jpeg", "gif", "png", "bmp", "webp"],
+                            imageUploadURL: "/file/upload"
                         });
                     });
                 </script>
@@ -103,6 +106,7 @@
         </div>
     </div>
 </div>
+<div th:insert="~{footer::footer}"></div>
 
 <script src="/js/publish.js"></script>
 </body>

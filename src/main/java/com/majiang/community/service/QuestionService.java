@@ -2,6 +2,7 @@ package com.majiang.community.service;
 
 import com.majiang.community.dto.PaginationDTO;
 import com.majiang.community.dto.QuestionDTO;
+import com.majiang.community.dto.QuestionQueryDTO;
 import com.majiang.community.exception.CustomizeErrorCode;
 import com.majiang.community.exception.CustomizeException;
 import com.majiang.community.mapper.QuestionExtendMapper;
@@ -29,7 +30,12 @@ public class QuestionService {
     private QuestionMapper questionMapper;
     @Autowired
     private QuestionExtendMapper questionExtendMapper;
-    public PaginationDTO list(Integer page, Integer size){
+    public PaginationDTO list(Integer page, Integer size, String search){
+        // 处理search
+        if (StringUtils.isNotBlank(search)){
+            String[] split = StringUtils.split(search, " ");
+            search = Arrays.stream(split).collect(Collectors.joining("|"));
+        }
 /**       对应数据分页查询条件offset
  *         select * from question limit offset,size
  *                                      0   ,5  -> 1 page
@@ -42,8 +48,10 @@ public class QuestionService {
  *
  */
         PaginationDTO paginationDTO = new PaginationDTO();
-//       问题总条数
-        Integer totalcount = (int)questionMapper.countByExample(new QuestionExample());
+      // 问题总条数
+        QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
+        questionQueryDTO.setSearch(search);
+        Integer totalcount = questionExtendMapper.countBySearch(questionQueryDTO);
         Integer totalPage;
         if (totalcount%size==0){
             // 10/5 共两页
@@ -55,14 +63,16 @@ public class QuestionService {
         if (page<1){
             page=1;
         }
-        if (page>totalPage){
-            page=totalPage+1;
+        if (totalPage!=0){
+            if (page>totalPage){
+                page=totalPage+1;
+            }
         }
         paginationDTO.setPagination(totalPage,page);
         Integer offset = size*(page-1);
-        QuestionExample questionExample = new QuestionExample();
-        questionExample.setOrderByClause("gmt_create desc");
-        List<Question> questionList = questionMapper.selectByExampleWithRowbounds(questionExample, new RowBounds(offset, size));
+        questionQueryDTO.setPage(offset);
+        questionQueryDTO.setSize(size);
+        List<Question> questionList = questionExtendMapper.selectBySearch(questionQueryDTO);
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questionList) {
             Long creator = question.getCreator();

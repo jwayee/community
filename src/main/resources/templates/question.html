@@ -25,9 +25,9 @@
     </script>
 </head>
 <body>
-<!--引入头部导航栏模板-->
-<div th:insert="~{navigation :: nav}"></div>
-<div class="container-fluid w main profile">
+    <!--引入头部导航栏模板-->
+    <div th:insert="~{navigation :: nav}"></div>
+    <div class="container-fluid w main profile">
     <div class="row">
         <!--左侧内容区外层容器-->
         <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12" style="padding:0;border-right: 1px solid #AAAAAA ">
@@ -114,24 +114,6 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 collapse hiddenbox" style="padding: 0"
                              th:id="${'comment-'+comment.id}">
                             <!----------------------------------------二级评论列表-------------------------------------------------->
-                            <!--<div class="aw-comment-list-wrap">-->
-
-                            <!--<div class="aw-comment-list clearfix">-->
-                            <!--<div class="aw-comment-img">-->
-                            <!--<img src="/img/avatar-max-img.png" alt="">-->
-                            <!--</div>-->
-                            <!--<div class="aw-comment-right">-->
-                            <!--<div class="aw-comment-right-wrap">-->
-                            <!--<span class="nameandtime"><span class="username">jway</span> · <span class="span">2018-9-9</span></span>-->
-                            <!--<div class="reply"><a href="">回复</a></div>-->
-                            <!--<div class="reply"><a href="">删除</a></div>-->
-                            <!--</div>-->
-                            <!--<p class="comment-content">springboot是spring的升级版，如何快速学习springboot，springboot是spring的升级版，-->
-                            <!--如何快速学习springbootspringboot是spring的升级版，如何快速学习springbootspringboot是spring的升级版，-->
-                            <!--如何快速学习springbootspringboot是spring的升级版，如何快速学习springboot</p>-->
-                            <!--</div>-->
-                            <!--</div>-->
-                            <!--</div>-->
                             <!--二级评论回复输入框-->
                             <form action="" class="aw-comment-form clearfix">
                                 <div>
@@ -208,7 +190,8 @@
         </div>
     </div>
 </div>
-<script src="/js/moment.js"></script>
-<script src="/js/community.js"></script>
+    <div th:insert="~{footer::footer}"></div>
+    <script src="/js/moment.js"></script>
+    <script src="/js/community.js"></script>
 </body>
 </html>

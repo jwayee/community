@@ -1,5 +1,6 @@
 package com.majiang.community.mapper;
 
+import com.majiang.community.dto.QuestionQueryDTO;
 import com.majiang.community.model.Question;
 import com.majiang.community.model.QuestionExample;
 import java.util.List;
@@ -134,4 +135,5 @@ public interface QuestionMapper {
      * @mbg.generated Wed Mar 18 14:26:57 CST 2020
      */
     int updateByPrimaryKey(Question record);
+
 }
