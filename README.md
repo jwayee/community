@@ -13,6 +13,7 @@
 [Flyway](https://flywaydb.org/getstarted/firststeps/maven)
 [lombok](https://www.projectlombok.org/)
 [markdown插件](http://editor.md.ipandao.com/)
+[aliyun java sdk](https://help.aliyun.com/document_detail/84781.html?spm=a2c4g.11186623.4.1.698d59aaCZEa3o)
 ##脚本
 ```sql
 CREATE TABLE USER(
