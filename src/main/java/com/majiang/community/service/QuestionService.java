@@ -51,7 +51,12 @@ public class QuestionService {
       // 问题总条数
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         questionQueryDTO.setSearch(search);
-        Integer totalcount = questionExtendMapper.countBySearch(questionQueryDTO);
+        Integer totalcount = null;
+        try {
+            totalcount = questionExtendMapper.countBySearch(questionQueryDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         Integer totalPage;
         if (totalcount%size==0){
             // 10/5 共两页
@@ -72,7 +77,12 @@ public class QuestionService {
         Integer offset = size*(page-1);
         questionQueryDTO.setPage(offset);
         questionQueryDTO.setSize(size);
-        List<Question> questionList = questionExtendMapper.selectBySearch(questionQueryDTO);
+        List<Question> questionList = null;
+        try {
+            questionList = questionExtendMapper.selectBySearch(questionQueryDTO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         List<QuestionDTO> questionDTOList = new ArrayList<>();
         for (Question question : questionList) {
             Long creator = question.getCreator();
