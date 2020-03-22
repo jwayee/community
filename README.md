@@ -1,5 +1,31 @@
 ## 码匠社区
 
+## 部署
+###依赖
+- git
+- JDK
+- Maven
+- MySQL
+## 步骤
+yum update:更新资源
+yum install git
+mkdir App
+cd App
+#下载代码
+git clone https://github.com/Jway12580/community.git
+#安装maven
+yum install maven
+#查看版本
+mvn -v  
+java -version
+#编译打包
+mvn compile package
+cp src/main/resources/application.properties src/main/resources/application-production.properties
+#打包新的配置
+mvn package
+#运行备份文件production.properties
+java -jar -Dspring.profiles.active=production target/community-0.0.1-SNAPSHOT.jar
+
 ## 资料
 [spring 文档](https://spring.io/guides)
 [spring web](https://spring.io/guides/gs/serving-web-content/)
