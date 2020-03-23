@@ -117,7 +117,7 @@
                     <!--<password>root</password>-->
                 <!--</configuration>-->
                 <configuration>
-                    <url>jdbc://mysql://---rm-2zee7u9ocp21dx4n9125010.mysql.rds.aliyuncs.com:3306//maven</url>
+                    <url>jdbc://mysql://---rm-2zee7u9ocp21dx4n9125010.mysql.rds.aliyuncs.com:3306/maven</url>
                     <user>jway</user>
                     <password>Qiu123456</password>
                 </configuration>
