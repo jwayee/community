@@ -1,1 +1,1 @@
-ALTER TABLE COMMENT ALTER COLUMN COMMENTATOR BIGINT DEFAULT NOT NULL;
+alter table comment alter column commentator bigint default not null;
