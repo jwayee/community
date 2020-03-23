@@ -5,6 +5,6 @@ create table user(
     name varchar(50),
     token char(36),
     avatar_url varchar(100) null,
-    gmt_create bigint,
-    gmt_modified bigint
+    gmt_create bigint default 0,
+    gmt_modified bigint default 0
 )
