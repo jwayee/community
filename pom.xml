@@ -110,17 +110,28 @@
                 <groupId>org.flywaydb</groupId>
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.4</version>
+
+                <!--<configuration>-->
+                    <!--<url>jdbc:h2:~/xiaojiang</url>-->
+                    <!--<user>root</user>-->
+                    <!--<password>root</password>-->
+                <!--</configuration>-->
                 <configuration>
-                    <url>jdbc:h2:~/xiaojiang</url>
-                    <user>root</user>
-                    <password>root</password>
+                    <url>jdbc://mysql://---rm-2zee7u9ocp21dx4n9125010.mysql.rds.aliyuncs.com:3306//maven</url>
+                    <user>jway</user>
+                    <password>Qiu123456</password>
                 </configuration>
                 <dependencies>
                     <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>1.4.199</version>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.16</version>
                     </dependency>
+                    <!--<dependency>-->
+                        <!--<groupId>com.h2database</groupId>-->
+                        <!--<artifactId>h2</artifactId>-->
+                        <!--<version>1.4.199</version>-->
+                    <!--</dependency>-->
                 </dependencies>
             </plugin>
 
@@ -130,10 +141,15 @@
                 <version>1.3.7</version>
                 <dependencies>
                     <dependency>
-                        <groupId>com.h2database</groupId>
-                        <artifactId>h2</artifactId>
-                        <version>1.4.199</version>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.16</version>
                     </dependency>
+                    <!--<dependency>-->
+                        <!--<groupId>com.h2database</groupId>-->
+                        <!--<artifactId>h2</artifactId>-->
+                        <!--<version>1.4.199</version>-->
+                    <!--</dependency>-->
                 </dependencies>
             </plugin>
 
