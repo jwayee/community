@@ -8,7 +8,7 @@ import com.majiang.community.exception.CustomizeErrorCode;
 import com.majiang.community.model.Comment;
 import com.majiang.community.model.User;
 import com.majiang.community.service.CommentService;
-import org.h2.util.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +28,7 @@ public class CommentController {
         if (user==null){
             return ResultDTO.errorOf(CustomizeErrorCode.NO_LOGIN);
         }
-        if (commentCreateDTO==null|| StringUtils.isNullOrEmpty(commentCreateDTO.getContent())){
+        if (commentCreateDTO==null|| StringUtils.isBlank(commentCreateDTO.getContent())){
             return ResultDTO.errorOf(CustomizeErrorCode.COMMENT_COTENT_NOT_EMPTY);
         }
         Comment comment = new Comment();

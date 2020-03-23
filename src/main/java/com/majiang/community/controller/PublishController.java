@@ -23,6 +23,7 @@ public class PublishController {
     @GetMapping("/publish/{id}")
     public String edit(@PathVariable("id")Long id,
                        Model model){
+        System.out.println(id);
         QuestionDTO questionDTO = questionService.getById(id);
         model.addAttribute("title",questionDTO.getTitle());
         model.addAttribute("description",questionDTO.getDescription());

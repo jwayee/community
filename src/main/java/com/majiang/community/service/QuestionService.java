@@ -142,7 +142,12 @@ public class QuestionService {
     }
 
     public QuestionDTO getById(Long id) {
-        Question question = questionMapper.selectByPrimaryKey(id);
+        Question question = null;
+        try {
+            question = questionMapper.selectByPrimaryKey(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         if (question==null){
             throw new CustomizeException(CustomizeErrorCode.QUESTOIN_NOT_FOUND);
         }
