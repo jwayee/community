@@ -30,7 +30,7 @@ public class PublishController {
         model.addAttribute("tag",questionDTO.getTag());
         model.addAttribute("id",questionDTO.getId());
         model.addAttribute("tags", TagCache.get());
-        return "/publish";
+        return "publish";
     }
     @GetMapping("/publish")
     public String publish(Model model){
