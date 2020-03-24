@@ -102,9 +102,9 @@ body {
 
 .comment-function li {
     list-style: none;
-    width: 50px;
+    width: 46px;
     float: left;
-    line-height: 28px;
+    line-height: 24px;
     text-align: center;
     background-color: #FAFAFA;
     border-radius: 5px;
@@ -135,6 +135,7 @@ body {
     color: white;
 }
 .comment-function .time {
+    font-size: 12px;
     float: right;
     color: #777;
 }
@@ -187,20 +188,22 @@ body {
     float: left;
 }
 .aw-comment-img img{
-    width: 32px;
+    width: 28px;
     margin: 10px;
+    border-radius:3px;
 }
 .aw-comment-right{
-    width: 850px;
+    width: 770px;
 }
-.nameandtime{
+.nameandTime span{
+    font-size: 12px;
     color: #AAAAAA;
 }
-.nameandtime .username{
+.nameandTime .username{
     color: #00b5e5;
 }
 .aw-comment-right .comment-content{
-    width: 815px;
+    width: 770px;
 }
 .aw-comment-right-wrap{
     height: 24px;
@@ -212,11 +215,12 @@ body {
     margin-right:10px;
 }
 .reply a{
+    font-size: 12px;
     display: block;
-    width: 40px;
-    height: 24px;
+    width: 36px;
+    height: 20px;
     color: white;
-    line-height: 24px;
+    line-height: 20px;
     text-align: center;
     background-color: yellowgreen;
     border-radius: 4px;
@@ -234,9 +238,10 @@ body {
 }
 .comment2-submit{
     display: none;
-    margin: 15px 10px;
+    margin: 15px 0px 15px 10px;
 }
 .comment2-submit li{
+    font-size: 12px;
     list-style: none;
     height: 24px;
     line-height: 24px;
@@ -255,7 +260,7 @@ body {
 }
 .comment2-submit .cancel{
     color: #777777;
-    background-color: #FAFAFA;
+    background-color: #DDDDDD;
 }
 .comment2-submit .cancel:hover{
     color: white;
