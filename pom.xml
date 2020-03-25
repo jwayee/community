@@ -18,6 +18,32 @@
         <java.version>1.8</java.version>
     </properties>
 
+    <profiles>
+        <!--开发环境-->
+        <profile>
+            <id>dev</id>
+            <properties>
+                <db.url>jdbc:mysql://localhost:3306/maven</db.url>
+                <db.user>root</db.user>
+                <db.password>root</db.password>
+            </properties>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+        </profile>
+
+        <!--线上环境-->
+        <profile>
+            <id>production</id>
+            <properties>
+                <db.url>jdbc:mysql://rm-2zee7u9ocp21dx4n9wo.mysql.rds.aliyuncs.com:3306/maven</db.url>
+                <db.user>jway</db.user>
+                <db.password>Qiu123456</db.password>
+            </properties>
+        </profile>
+
+    </profiles>
+
     <dependencies>
 
         <dependency>
@@ -64,11 +90,6 @@
             <version>8.0.16</version>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>com.h2database</groupId>-->
-            <!--<artifactId>h2</artifactId>-->
-            <!--<version>1.4.199</version>-->
-        <!--</dependency>-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -113,15 +134,10 @@
                 <artifactId>flyway-maven-plugin</artifactId>
                 <version>5.2.4</version>
 
-                <!--<configuration>-->
-                    <!--<url>jdbc:h2:~/xiaojiang</url>-->
-                    <!--<user>root</user>-->
-                    <!--<password>root</password>-->
-                <!--</configuration>-->
                 <configuration>
-                    <url>jdbc:mysql://rm-2zee7u9ocp21dx4n9wo.mysql.rds.aliyuncs.com:3306/maven</url>
-                    <user>jway</user>
-                    <password>Qiu123456</password>
+                    <url>${db.url}</url>
+                    <user>${db.user}</user>
+                    <password>${db.password}</password>
                 </configuration>
                 <dependencies>
                     <dependency>
@@ -130,9 +146,9 @@
                         <version>8.0.16</version>
                     </dependency>
                     <!--<dependency>-->
-                        <!--<groupId>com.h2database</groupId>-->
-                        <!--<artifactId>h2</artifactId>-->
-                        <!--<version>1.4.199</version>-->
+                    <!--<groupId>com.h2database</groupId>-->
+                    <!--<artifactId>h2</artifactId>-->
+                    <!--<version>1.4.199</version>-->
                     <!--</dependency>-->
                 </dependencies>
             </plugin>
@@ -148,9 +164,9 @@
                         <version>8.0.16</version>
                     </dependency>
                     <!--<dependency>-->
-                        <!--<groupId>com.h2database</groupId>-->
-                        <!--<artifactId>h2</artifactId>-->
-                        <!--<version>1.4.199</version>-->
+                    <!--<groupId>com.h2database</groupId>-->
+                    <!--<artifactId>h2</artifactId>-->
+                    <!--<version>1.4.199</version>-->
                     <!--</dependency>-->
                 </dependencies>
             </plugin>
