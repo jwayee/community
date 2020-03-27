@@ -30,7 +30,7 @@ public class QuestionService {
     private QuestionMapper questionMapper;
     @Autowired
     private QuestionExtendMapper questionExtendMapper;
-    public PaginationDTO list(Integer page, Integer size, String search){
+    public PaginationDTO list(Integer page, Integer size, String search, String tag){
         // 处理search
         if (StringUtils.isNotBlank(search)){
             String[] split = StringUtils.split(search, " ");
@@ -51,6 +51,7 @@ public class QuestionService {
       // 问题总条数
         QuestionQueryDTO questionQueryDTO = new QuestionQueryDTO();
         questionQueryDTO.setSearch(search);
+        questionQueryDTO.setTag(tag);
         Integer totalcount = null;
         try {
             totalcount = questionExtendMapper.countBySearch(questionQueryDTO);
