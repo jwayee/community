@@ -6,10 +6,10 @@
 <generatorConfiguration>
     <context id="DB2Tables" targetRuntime="MyBatis3">
         <plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
-        <jdbcConnection driverClass="org.h2.Driver"
-                        connectionURL="jdbc:h2:~/xiaojiang"
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://182.92.119.72:3306/maven"
                         userId="root"
-                        password="root">
+                        password="pass123">
         </jdbcConnection>
 
         <javaTypeResolver >

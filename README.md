@@ -23,23 +23,25 @@ mvn compile package
 cp src/main/resources/application.properties src/main/resources/application-production.properties
 #打包新的配置
 mvn package
+#flyway线上管理数据库
+#mvn clean compile flyway:migrate -Pproduction
 #运行备份文件production.properties
 java -jar -Dspring.profiles.active=production target/community-0.0.1-SNAPSHOT.jar
 
 ## 资料
-[spring 文档](https://spring.io/guides)
-[spring web](https://spring.io/guides/gs/serving-web-content/)
-[es 社区](https://elasticsearch.cn/explore)
-[bootstap](https://v3.bootcss.com/getting-started)
-[Github OAuth](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)
-[Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)
+[spring 文档](https://spring.io/guides)  
+[spring web](https://spring.io/guides/gs/serving-web-content/)  
+[es 社区](https://elasticsearch.cn/explore)  
+[bootstap](https://v3.bootcss.com/getting-started)  
+[Github OAuth](https://developer.github.com/apps/building-oauth-apps/creating-an-oauth-app/)  
+[Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)  
 ## 工具
-[git](https://git-scm.com/download)
-[Visual Paradigm(画流程图)](https://www.visual-paradigm.com)
-[Flyway](https://flywaydb.org/getstarted/firststeps/maven)
-[lombok](https://www.projectlombok.org/)
-[markdown插件](http://editor.md.ipandao.com/)
-[aliyun java sdk](https://help.aliyun.com/document_detail/84781.html?spm=a2c4g.11186623.4.1.698d59aaCZEa3o)
+[git](https://git-scm.com/download)  
+[Visual Paradigm(画流程图)](https://www.visual-paradigm.com)  
+[Flyway](https://flywaydb.org/getstarted/firststeps/maven)  
+[lombok](https://www.projectlombok.org/)  
+[markdown插件](http://editor.md.ipandao.com/)  
+[aliyun java sdk](https://help.aliyun.com/document_detail/84781.html?spm=a2c4g.11186623.4.1.698d59aaCZEa3o)  
 ##脚本
 ```sql
 CREATE TABLE USER(
@@ -80,3 +82,5 @@ CREATE TABLE notification
 mvn flyway:migrate
 mvn -Dmybatis.generator.overwrite=true mybatis-generator:generate
 ```
+
+#

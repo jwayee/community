@@ -54,7 +54,7 @@ public class QuestionService {
         questionQueryDTO.setTag(tag);
         Integer totalcount = null;
         try {
-            totalcount = questionExtendMapper.countBySearch(questionQueryDTO);
+             totalcount = questionExtendMapper.countBySearch(questionQueryDTO);
         } catch (Exception e) {
             e.printStackTrace();
         }

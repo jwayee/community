@@ -23,9 +23,12 @@
         <profile>
             <id>dev</id>
             <properties>
-                <db.url>jdbc:mysql://localhost:3306/maven</db.url>
+<!--                <db.url>jdbc:mysql://localhost:3306/maven</db.url>-->
+<!--                <db.user>root</db.user>-->
+<!--                <db.password>root</db.password>-->
+                <db.url>jdbc:mysql://182.92.119.72:3306/maven</db.url>
                 <db.user>root</db.user>
-                <db.password>root</db.password>
+                <db.password>pass123</db.password>
             </properties>
             <activation>
                 <activeByDefault>true</activeByDefault>
@@ -87,8 +90,9 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>8.0.16</version>
+            <version>5.1.45</version>
         </dependency>
+
 
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -134,7 +138,7 @@
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
-                        <version>8.0.16</version>
+                        <version>5.1.45</version>
                     </dependency>
                     <!--<dependency>-->
                     <!--<groupId>com.h2database</groupId>-->
@@ -152,7 +156,7 @@
                     <dependency>
                         <groupId>mysql</groupId>
                         <artifactId>mysql-connector-java</artifactId>
-                        <version>8.0.16</version>
+                        <version>5.1.45</version>
                     </dependency>
                     <!--<dependency>-->
                     <!--<groupId>com.h2database</groupId>-->
